@@ -5,7 +5,7 @@
 [![](https://img.shields.io/badge/no-bugs-brightgreen.svg)](https://github.com/lxe/no-bugs) 
 [![](https://img.shields.io/badge/coverage-%F0%9F%92%AF-green.svg)](https://github.com/lxe/onehundred/tree/master)
 
-Forked from: [lxe/simple-llama-finetuner](https://github.com/lxe/simple-llama-finetuner)
+(Forked from: [lxe/simple-llama-finetuner](https://github.com/lxe/simple-llama-finetuner))
 
 Simple LLaMA Finetuner is a beginner-friendly interface designed to facilitate fine-tuning the [LLaMA-7B](https://github.com/facebookresearch/llama) language model using [LoRA](https://arxiv.org/abs/2106.09685) method via the [PEFT library](https://github.com/huggingface/peft) on commodity NVIDIA GPUs. With small dataset and sample lengths of 256, you can even run this on a regular Colab Tesla T4 instance.
 
