@@ -8,6 +8,7 @@ import peft
 import datasets
 import gradio as gr
 
+hf_path = 'decapoda-research/llama-7b-hf'
 model = None
 tokenizer = None
 current_peft_model = None
@@ -16,7 +17,7 @@ def load_base_model():
     global model
     print('Loading base model...')
     model = transformers.LlamaForCausalLM.from_pretrained(
-        'decapoda-research/llama-7b-hf',
+        hf_path,
         load_in_8bit=True,
         torch_dtype=torch.float16,
         device_map={'':0}
@@ -26,7 +27,7 @@ def load_tokenizer():
     global tokenizer
     print('Loading tokenizer...')
     tokenizer = transformers.LlamaTokenizer.from_pretrained(
-        'decapoda-research/llama-7b-hf',
+        hf_path,
     )
 
 def load_peft_model(model_name):
@@ -128,7 +129,7 @@ def tokenize_and_train(
     if (model is None): load_base_model()
     if (tokenizer is None): 
         tokenizer = transformers.LlamaTokenizer.from_pretrained(
-            "decapoda-research/llama-7b-hf", add_eos_token=True
+            hf_path, add_eos_token=True
         )
 
     assert model is not None
@@ -260,7 +261,7 @@ def random_hyphenated_word():
     word_list = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig']
     word1 = random.choice(word_list)
     word2 = random.choice(word_list)
-    return word1 + '-' + word2
+    return word1 + '-' + word2 
 
 def training_tab():
     with gr.Tab("Finetuning"):
@@ -440,6 +441,12 @@ with gr.Blocks(
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Simple LLaMA Finetuner")
     parser.add_argument("-s", "--share", action="store_true", help="Enable sharing of the Gradio interface")
+    parser.add_argument("-p", '--path', type=str, help="set huggingface model path" )
     args = parser.parse_args()
+
+    if args.path:
+        hf_path = args.path
+      
+    print("launching with huggingface model: "+hf_path)
 
     demo.queue().launch(share=args.share)
