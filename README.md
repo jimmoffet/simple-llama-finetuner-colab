@@ -1,13 +1,3 @@
----
-title: Simple LLaMA Finetuner
-emoji: 🦙
-colorFrom: yellow
-colorTo: orange
-sdk: gradio
-app_file: main.py
-pinned: false
----
-
 # 🦙 Simple LLaMA Finetuner
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lxe/simple-llama-finetuner/blob/master/Simple_LLaMA_FineTuner_Colab.ipynb)
