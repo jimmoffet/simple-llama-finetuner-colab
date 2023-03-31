@@ -30,11 +30,14 @@ def load_tokenizer():
         hf_path,
     )
 
-def load_peft_model(model_name):
+def load_peft_model(model_name, sub_pretrain=False):
     global model
+    if sub_pretrain:
+      model_name = "tloen/alpaca-lora-7b"
     print('Loading peft model ' + model_name + '...')
     model = peft.PeftModel.from_pretrained(
-        model, model_name,
+        model, 
+        model_name,
         torch_dtype=torch.float16
     )
 
@@ -80,7 +83,8 @@ def generate_text(
 
         current_peft_model = peft_model
         if (peft_model is not None):
-            load_peft_model(peft_model)
+            load_peft_model(peft_model, True) # sub pretrained lora
+            # load_peft_model(peft_model, False)
 
     if (model is None): load_base_model()
     if (tokenizer is None): load_tokenizer()
@@ -96,9 +100,7 @@ def generate_text(
         temperature=temperature,
         top_p=top_p,
         top_k=top_k,
-        repetition_penalty=repetition_penalty,
-        do_sample=True,
-        num_beams=1,
+        num_beams=4,
     )
 
     with torch.no_grad():
@@ -384,7 +386,7 @@ def inference_tab():
                 )
 
                 top_k = gr.Slider(
-                    minimum=0, maximum=200, value=50, step=1,
+                    minimum=0, maximum=200, value=40, step=1,
                     label="Top K",
                     info="Sets the number of top tokens to consider during sampling. In top-k sampling, only the 'top_k' tokens with the highest probabilities are considered for sampling. This method can lead to more focused and coherent outputs by reducing the impact of low probability tokens."
                 )
@@ -396,7 +398,7 @@ def inference_tab():
                 )
 
                 max_new_tokens = gr.Slider(
-                    minimum=0, maximum=4096, value=50, step=1,
+                    minimum=0, maximum=4096, value=256, step=1,
                     label="Max New Tokens",
                     info="Limits the maximum number of tokens generated in a single iteration."
                 )
