@@ -1,6 +1,6 @@
 # 🦙 Simple LLaMA Finetuner
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jimmoffet/simple-llama-finetuner-colab/blob/master/Simple_LLaMA_FineTuner_Colab.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jimmoffet/simple-llama-finetuner-colab/blob/master/Simple_LLaMA_FineTuner_Colab.ipynb) <-- MAKE A COPY
 
 (Forked from: [lxe/simple-llama-finetuner](https://github.com/lxe/simple-llama-finetuner))
 
